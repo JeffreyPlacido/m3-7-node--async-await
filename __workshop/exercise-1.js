@@ -3,23 +3,29 @@
 
 const makeAllCaps = (array) => {
   return new Promise((resolve, reject) => {
-    array.every((word) => typeof word === 'string')
+    array.every((word) => typeof word === "string")
       ? resolve(array.map((word) => word.toUpperCase()))
-      : reject('Error: Not all items in the array are strings!');
+      : reject(console.log("Big Rip"));
   });
 };
 
 const sortWords = (array) => {
   return new Promise((resolve, reject) => {
-    array.every((word) => typeof word === 'string')
+    array.every((word) => typeof word === "string")
       ? resolve(array.sort())
-      : reject('Error: Something went wrong with sorting words.');
+      : reject("Error: Something went wrong with sorting words.");
   });
 };
 
 const textTransform = async (array) => {
-  // here
+  const capLetters = await makeAllCaps(array);
+  const sortingHat = await sortWords(capLetters);
+  return sortingHat;
 };
 
-textTransform(['cucumber', 'tomatos', 'avocado']);
-textTransform(['cucumber', 44, true]);
+textTransform(["cucumber", "tomatos", "avocado"]).then((response) => {
+  console.log(response);
+});
+textTransform(["cucumber", 23, "bacon"]).then((response) => {
+  console.log(response);
+});

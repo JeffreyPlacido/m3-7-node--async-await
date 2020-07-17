@@ -1,12 +1,29 @@
 // Exercise 3
 // ----------
 
+const { response } = require("express");
+
 const doublesLater = (num) => {
-  // 1. waits 2 seconds (You could console a message here. It might make the 2 second wait easier ;)
-  // 2. returns the double of the num
+  return new Promise((resolve, reject) => {
+    if (typeof num === "number") {
+      console.log(num, "wait 2 seconds");
+      setTimeout(() => {
+        const doubleNum = num * 2;
+        resolve(doubleNum);
+      }, 2000);
+    } else {
+      error("this isnt a number");
+    }
+  });
 };
 
-// 3. handleSum function (async/await)
+const handleSum = async (num) => {
+  const firstRun = await doublesLater(num);
+  const secondRun = await doublesLater(firstRun);
+  const thirdRun = await doublesLater(secondRun);
+  console.log(thirdRun);
+  return firstRun + secondRun + thirdRun;
+};
 
 // 4. verification
-handleSum(10).then((ans) => console.log(ans));
+handleSum(10).then((ans) => console.log(ans))
